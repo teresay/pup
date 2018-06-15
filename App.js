@@ -1,23 +1,48 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, AppRegistry } from 'react-native';
+import {createStackNavigator} from 'react-navigation'
+import Home from './src/components/Home'
+import Search from './src/components/Search'
+import Header from './src/components/Header'
 
-export default class App extends React.Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menu.</Text>
-      </View>
-    );
-  }
+
+
+const App = () => {
+
+  return (
+    <Home />
+  )
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+// export default App
+
+const RootNavigator = createStackNavigator({
+  Home: {
+    screen: Home,
+    navigationOptions: {
+      headerTitle: 'Home',
+    }
   },
-});
+  Search: {
+    screen: Search,
+    navigationOptions: {
+      headerTitle: 'Search'
+    }
+  }
+})
+
+export default RootNavigator
+
+AppRegistry.registerComponent('pup', () => App)
+
+
+
+// const styles = StyleSheet.create({
+//   container: {
+//     flex: 1,
+//     backgroundColor: '#fff',
+//     alignItems: 'center',
+//     justifyContent: 'center',
+//   },
+// });
+
