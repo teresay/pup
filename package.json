@@ -27,6 +27,7 @@
     "react-native": "^0.55.2",
     "react-native-background-fetch": "^2.4.3",
     "react-native-background-geolocation": "^2.12.2",
+    "react-native-maps": "^0.21.0",
     "react-native-radar": "^1.0.17",
     "react-native-web": "^0.8.3",
     "react-navigation": "^2.3.1",

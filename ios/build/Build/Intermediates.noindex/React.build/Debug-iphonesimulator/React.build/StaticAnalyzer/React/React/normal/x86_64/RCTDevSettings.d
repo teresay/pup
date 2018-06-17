@@ -1,0 +1,23 @@
+dependencies: \
+  /Users/teresa/Documents/Fullstack/pup/node_modules/react-native/React/Modules/RCTDevSettings.mm \
+  /Users/teresa/Documents/Fullstack/pup/node_modules/react-native/React/Modules/RCTDevSettings.h \
+  /Users/teresa/Documents/Fullstack/pup/node_modules/react-native/React/Base/RCTBridge.h \
+  /Users/teresa/Documents/Fullstack/pup/node_modules/react-native/React/Base/RCTBridgeDelegate.h \
+  /Users/teresa/Documents/Fullstack/pup/node_modules/react-native/React/Base/RCTJavaScriptLoader.h \
+  /Users/teresa/Documents/Fullstack/pup/node_modules/react-native/React/Base/RCTDefines.h \
+  /Users/teresa/Documents/Fullstack/pup/node_modules/react-native/React/Base/RCTBridgeModule.h \
+  /Users/teresa/Documents/Fullstack/pup/node_modules/react-native/React/Base/RCTFrameUpdate.h \
+  /Users/teresa/Documents/Fullstack/pup/node_modules/react-native/React/Base/RCTInvalidating.h \
+  /Users/teresa/Documents/Fullstack/pup/ios/build/Build/Products/Debug-iphonesimulator/include/jschelpers/JavaScriptCore.h \
+  /Users/teresa/Documents/Fullstack/pup/ios/build/Build/Products/Debug-iphonesimulator/include/jschelpers/JSCWrapper.h \
+  /Users/teresa/Documents/Fullstack/pup/node_modules/react-native/React/Base/RCTBridge+Private.h \
+  /Users/teresa/Documents/Fullstack/pup/node_modules/react-native/React/Base/RCTEventDispatcher.h \
+  /Users/teresa/Documents/Fullstack/pup/node_modules/react-native/React/Modules/RCTJSCSamplingProfiler.h \
+  /Users/teresa/Documents/Fullstack/pup/node_modules/react-native/React/Base/RCTLog.h \
+  /Users/teresa/Documents/Fullstack/pup/node_modules/react-native/React/Base/RCTAssert.h \
+  /Users/teresa/Documents/Fullstack/pup/node_modules/react-native/React/Base/RCTUtils.h \
+  /Users/teresa/Documents/Fullstack/pup/node_modules/react-native/React/DevSupport/RCTPackagerClient.h \
+  /Users/teresa/Documents/Fullstack/pup/node_modules/react-native/React/Profiler/RCTProfile.h \
+  /Users/teresa/Documents/Fullstack/pup/node_modules/react-native/React/DevSupport/RCTPackagerConnection.h \
+  /Users/teresa/Documents/Fullstack/pup/node_modules/react-native/React/DevSupport/RCTInspectorDevServerHelper.h \
+  /Users/teresa/Documents/Fullstack/pup/node_modules/react-native/React/Inspector/RCTInspectorPackagerConnection.h

@@ -1,3 +1,5 @@
-import { AppRegistry } from 'react-native';
-import App from './App';
-AppRegistry.registerComponent('pup', () => App);
+import {AppRegistry } from 'react-native';
+import App from './src/app'
+
+
+AppRegistry.registerComponent('pup', () => App)
