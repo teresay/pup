@@ -1,4 +1,6 @@
 import axios from 'axios'
+import {Actions} from 'react-native-router-flux'
+
 
 /**
  * ACTION TYPES
@@ -6,6 +8,7 @@ import axios from 'axios'
 
 const SET_LOCATION = 'SET_LOCATION'
 const SET_USER = 'SET_USER'
+const FETCH_ONLINE_DOGS = 'FETCH_ONLINE_DOGS'
 
 
 /**
@@ -13,8 +16,8 @@ const SET_USER = 'SET_USER'
  */
 
 const initialState = {
-  user: {},
-  location: []
+  // info: {},
+  // location: []
 }
 
 /**
@@ -22,7 +25,7 @@ const initialState = {
  */
 
 const settingLocation = (coordinates) => {
-  console.log('in the action creator', coordinates)
+  console.log('in the settingLocation action creator', coordinates)
   return {
   type: SET_LOCATION,
   coordinates
@@ -36,6 +39,13 @@ const authenticate = (user) => {
   }
 }
 
+const fetchingOnlineDogs = (dogs) => {
+  return {
+    type: FETCH_ONLINE_DOGS,
+    dogs
+  }
+}
+
 
 /**
  * THUNK CREATORS
@@ -43,22 +53,32 @@ const authenticate = (user) => {
 
 export const auth  = (email, password, navigation) => async dispatch => {
   console.log('in the auth', email, password)
-  const key = {email: "arya@w.com",password: "arya"}
+  const key = {email: email,password: password}
   console.log('key is', key)
   const user = await axios.put(`http://localhost:7000/api/auth/login`, {key})
-  console.log('auth user is', user)
-  navigator.geolocation.getCurrentPosition(
-    async (position) => {
-       const longitude = Number(position.coords.longitude)
-       const latitude = Number(position.coords.latitude)
-       const newPosition = [latitude, longitude]
-       console.log('newPosition', newPosition, latitude, longitude)
-       await axios.put(`http://localhost:7000/api/users/location/${userId}`, newPosition)
-       dispatch(settingLocation(newPosition))
-    }
- );
-  dispatch(authenticate(user))
-  navigation.navigate("Home")
+  console.log('auth user is', user.data)
+
+  const newPosition = [10, 10]
+  // dispatch(settingLocation(newPosition))
+  // console.log('dispatched settingLocation')
+  dispatch(authenticate(user.data))
+  console.log('dispatchted authenticate')
+//   navigator.geolocation.getCurrentPosition(
+//     async (position) => {
+//       console.log('IN NAVIGATION!!')
+//        const longitude = Number(position.coords.longitude)
+//        const latitude = Number(position.coords.latitude)
+//        const newPosition = [10, 10]
+//        console.log('newPosition', newPosition, latitude, longitude)
+//        await axios.put(`http://localhost:7000/api/users/location/${user.data.id}`, newPosition)
+//        console.log('AXIOS IS DONE')
+//        dispatch(settingLocation(newPosition))
+//        console.log('setting location dispatch finished')
+//        console('dispatches have finished', navigation)
+//         dispatch(authenticate(user.data))
+//       Actions.search()
+//     }
+//  );
 }
 
 export const setLocation = (userId) => async dispatch => {
@@ -67,15 +87,16 @@ export const setLocation = (userId) => async dispatch => {
     async (position) => {
        const longitude = Number(position.coords.longitude)
        const latitude = Number(position.coords.latitude)
-       const newPosition = [latitude, longitude]
+       const newPosition = [10, 10]
        console.log('newPosition', newPosition, latitude, longitude)
        await axios.put(`http://localhost:7000/api/users/location/${userId}`, newPosition)
+       console.log('made axios put request in setLocation')
        dispatch(settingLocation(newPosition))
     }
  )
 }
 
-export const getLocation = () => dispatch => {
+export const getLocation = (userId) => async dispatch => {
   console.log('in the getLocation thunk')
   navigator.geolocation.getCurrentPosition(
     async (position) => {
@@ -84,9 +105,16 @@ export const getLocation = () => dispatch => {
        const newPosition = [latitude, longitude]
        console.log('newPosition', newPosition, latitude, longitude)
       //  await axios.put(`http://localhost:7000/api/users/location/${userId}`, newPosition)
+       console.log('just sent axios call with newPosition', newPosition)
        dispatch(settingLocation(newPosition))
+       console.log('getLocation has disptachted setting location')
     }
  );
+}
+
+export const fetchOnlineDogs = () => async dispatch => {
+  const response = await axios.get(`http://localhost:7000/api/users/active/1`)
+  dispatch(fetchingOnlineDogs(response.data))
 }
 
 
@@ -99,12 +127,19 @@ export const getLocation = () => dispatch => {
 export default function(state = initialState, action) {
   switch (action.type) {
     case SET_LOCATION: {
-      console.log('in the reducer', action.coordinates)
-      return {...state, location: action.coordinates}
+      console.log('in the set location reducer', action.coordinates)
+      const newstate = {...state, location: action.coordinates}
+      return newstate
     }
     case SET_USER: {
       console.log('in the set user reducer', action.user)
-      return {...state, info: action.user}
+      const newuser = {...state, info: action.user}
+      return newuser
+    }
+    case FETCH_ONLINE_DOGS: {
+      console.log('in the fetch online dogs reducer', action.dogs)
+      const dogs = {...state, onlineDogs: action.dogs}
+      return dogs
     }
     default:
       return state

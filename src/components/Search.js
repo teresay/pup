@@ -4,18 +4,46 @@ import Header from "./Header";
 import MapView from "react-native-maps";
 import {connect} from 'react-redux'
 import { setLocation, getLocation } from "../store/user";
+import {withRouter} from 'react-router'
+import {
+  NativeRouter as Router,
+  DeepLinking,
+  BackButton,
+  Link,
+  Route
+  // etc.
+} from 'react-router-native'
+import Spinner from 'react-native-loading-spinner-overlay';
 
 class Search extends React.Component {
   constructor() {
     super()
     this.state = {
-      latitude: 1,
-      longitude: 1
+      latitude: 40.766018,
+      longitude: -73.993077
+      ,
+      loading: false
     };
   }
 
 
-  componentDidMount() {
+  componentDidMount = async() => {
+    // await this.props.getLocation()
+    // if (this.props.location[0]) {
+    // this.setState({
+    //   latitude: this.props.location[0],
+    //   longitude: this.props.location[1],
+    //   loading: false
+    // })}
+
+    console.log('in component did mount', this.props)
+
+
+    }
+
+
+
+
     // navigator.geolocation.getCurrentPosition(
     //   position => {
     //     const nlongitude = position.coords.longitude;
@@ -24,13 +52,9 @@ class Search extends React.Component {
     //     if (this.props.setLocation) {
     //       this.props.setLocation(1, newPosition);
     //       console.log("initial position", this.props);
-    if(this.props.location[0]) {
-          this.setState({
-            latitude: this.props.location[0],
-            longitude: this.props.location[1]
-          })
-        }
-      }
+
+
+
     //       console.log('set state', this.state)
     //     }
     //   }
@@ -38,22 +62,26 @@ class Search extends React.Component {
 
 
   render() {
-    console.log('in the render', this.state)
+    console.log('rendering search')
     return (
       <View style={styles.container}>
+      {/* <Spinner visible={this.state.loading} textContent={"Loading..."} textStyle={{color: 'blue'}}/> */}
         <MapView
           style={styles.map}
           initialRegion={{
-            latitude: this.props.location[0],
-            longitude: this.props.location[1],
-            latitudeDelta: 0.0922,
-            longitudeDelta: 0.0421
+            // latitude: this.props.location[0],
+            // longitude: this.props.location[1],
+            latitude: this.state.latitude,
+            longitude: this.state.longitude,
+            latitudeDelta: 0.0122,
+            longitudeDelta: 0.0021
           }}
         />
         <Text>Search here!</Text>
       </View>
     );
   }
+
 }
 
 const styles = StyleSheet.create({
@@ -77,21 +105,26 @@ const styles = StyleSheet.create({
   }
 });
 
-const mapState = state => {
+Search.propTypes = {
+
+}
+
+const mapStateToProps = state => {
+  console.log('in map state', state.user.location)
   return {
     location: state.user.location
   };
 };
 
-const mapDispatch = dispatch => {
+const mapDispatchToProps = dispatch => {
   return {
-    getLocation: () => dispatch(getLocation()),
+    getLocation: (userId) => dispatch(getLocation(userId)),
     setLocation: (coordinates, userId) =>
       dispatch(setLocation(coordinates, userId))
   };
 };
 
 export default connect(
-  mapState,
-  mapDispatch
+  mapStateToProps,
+  mapDispatchToProps
 )(Search);

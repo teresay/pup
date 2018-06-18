@@ -6,6 +6,8 @@ import Search from './components/Search'
 import Login from './components/Login'
 import {Provider} from 'react-redux'
 import store from './store/index'
+// import { NativeRouter, Route, Link } from 'react-router-native'
+import RouterComponent from './router'
 
 
 class App extends React.Component {
@@ -17,9 +19,12 @@ render() {
   }
   return (
     <Provider store={store}>
+    {/* <NativeRouter> */}
     <View>
-    <RootNavigator screenProps={screenProps}/>
+      <RootNavigator screenProps={screenProps} />
+    <RouterComponent/>
     </View>
+    {/* </NativeRouter> */}
     </Provider>
   )
 }}
