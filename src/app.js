@@ -3,23 +3,36 @@ import { StyleSheet, Text, View, AppRegistry } from 'react-native';
 import {createStackNavigator} from 'react-navigation'
 import Home from './components/Home'
 import Search from './components/Search'
+import Login from './components/Login'
 import {Provider} from 'react-redux'
 import store from './store/index'
 
 
-
-const App = () => {
-
+class App extends React.Component {
+render() {
+  const screenProps = {
+    user: {
+      name: 'test'
+    }
+  }
   return (
     <Provider store={store}>
-    <Home />
+    <View>
+    <RootNavigator screenProps={screenProps}/>
+    </View>
     </Provider>
   )
-}
+}}
 
 export default App
 
 const RootNavigator = createStackNavigator({
+  Main: {
+    screen: Login,
+    navigationOptions: {
+      headerTitle: 'Sign In',
+    }
+  },
   Home: {
     screen: Home,
     navigationOptions: {
@@ -34,7 +47,7 @@ const RootNavigator = createStackNavigator({
   }
 })
 
-// export default RootNavigator
+// // export {RootNavigator}
 
 AppRegistry.registerComponent('pup', () => App)
 
